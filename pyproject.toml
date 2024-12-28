@@ -1,0 +1,73 @@
+[project]
+name = "basilico"
+license = "MIT"
+description = "Build HTML components in Python."
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [{ name = "Arsen Arutiunian", email = "arsen.ps@icloud.com" }]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Information Technology",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Internet",
+]
+dependencies = []
+dynamic = ["version"]
+
+[tool.ruff]
+line-length = 100
+indent-width = 4
+target-version = "py311"
+src = ["src"]
+
+[tool.ruff.lint]
+select = [
+    'F',      # Pyflakes
+    'E',      # pycodestyle (Error)
+    'I',      # isort
+    'UP',     # pyupgrade
+    'YTT',    # flake8-2020
+    'B',      # flake8-bugbear
+    'T10',    # flake8-debugger
+    'T20',    # flake8-print
+    'C4',     # flake8-comprehensions
+    'PYI006', # flake8-pyi
+    'PYI062', # flake8-pyi
+    'PYI063', # flake8-pyi
+    'PYI066', # flake8-pyi
+]
+
+[tool.coverage.run]
+source = ["src/basilico"]
+
+[tool.pytest.ini_options]
+testpaths = ["src/tests"]
+addopts = "-m 'not benchmark'"
+
+[tool.pyright]
+include = ["src/basilico", "src/tests"]
+typeCheckingMode = "basic"
+pythonVersion = "3.11"
+
+[dependency-groups]
+dev = [
+    "coverage>=7.6.9",
+    "pytest-benchmark>=5.1.0",
+    "pytest>=8.3.4",
+    "pyright>=1.1.391",
+    "ruff>=0.8.4",
+]
+
+[tool.hatch.version]
+path = "src/basilico/__init__.py"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
